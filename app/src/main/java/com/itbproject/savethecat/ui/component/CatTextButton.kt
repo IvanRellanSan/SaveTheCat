@@ -7,10 +7,10 @@ import androidx.compose.material.TextButton
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun CatTextButton(modifier: Modifier = Modifier, text: String) {
+fun CatTextButton(onClick: () -> Unit, modifier: Modifier = Modifier, text: String) {
     TextButton(
         modifier = modifier,
-        onClick = { /*TODO*/ }
+        onClick = onClick
     ) {
         Text(
             text = text
@@ -21,5 +21,5 @@ fun CatTextButton(modifier: Modifier = Modifier, text: String) {
 @Preview
 @Composable
 fun CatTextButtonPreview() {
-    CatTextButton(text = "Is this a preview? Don't click this")
+    CatTextButton(onClick = { }, text = "Is this a preview? Don't click this")
 }

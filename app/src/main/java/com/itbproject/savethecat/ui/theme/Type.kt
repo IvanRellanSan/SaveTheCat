@@ -1,5 +1,6 @@
 package com.itbproject.savethecat.ui.theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -7,10 +8,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.itbproject.savethecat.R
+import com.itbproject.savethecat.ui.theme.LightBrown
 
 val Rowdies = FontFamily(
     Font(R.font.rowdies_regular),
-    Font(R.font.alkatra_variablefont_bold, weight = FontWeight.Bold)
+    Font(R.font.rowdies_regular, weight = FontWeight.Bold)
 )
 
 // Set of Material typography styles to start with
@@ -19,6 +21,11 @@ val Typography = Typography(
         fontFamily = Rowdies,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = Rowdies,
+        fontWeight = FontWeight.Bold,
+        fontSize = 26.sp
     )
     /* Other default text styles to override
     button = TextStyle(

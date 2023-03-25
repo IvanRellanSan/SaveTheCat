@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.itbproject.savethecat.data.Datasource
+import com.itbproject.savethecat.ui.component.CatGrid
+import com.itbproject.savethecat.ui.component.GridScreen
 import com.itbproject.savethecat.ui.component.LoginScreen
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 
@@ -34,10 +37,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StartScreen() {
-    LoginScreen(
-        modifier = Modifier
-            .fillMaxSize()
-    )
+    val catList = Datasource().loadAffirmations()
+    GridScreen()
+//    CatGrid(
+//        catList,
+//        modifier = Modifier
+//            .fillMaxSize()
+//    )
 }
 
 @Preview(showBackground = true)

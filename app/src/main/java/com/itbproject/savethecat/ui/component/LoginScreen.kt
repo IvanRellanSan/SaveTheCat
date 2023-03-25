@@ -24,12 +24,12 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             contentDescription = "Our logo",
             modifier = Modifier
                 .size(200.dp))
-        
+
         Spacer(
             modifier = Modifier
                 .padding(top = 5.dp)
         )
-        
+
         InputField(
             title = "Name"
         )
@@ -47,13 +47,15 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 15.dp)
         )
-        
+
         CatButton(
             text = "Sign in",
             modifier = Modifier
+                .size(width = 150.dp, height = 40.dp)
         )
 
         CatTextButton(
+            onClick = { },
             text = "Don't have an account? Click here",
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
@@ -64,7 +66,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    Surface() {
+    Surface {
         LoginScreen()
     }
 }
