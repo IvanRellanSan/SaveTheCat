@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StartScreen(viewModel: GridViewModel = viewModel()) {
-    viewModel.loadState()
+    viewModel.getBreeds()
     val cats by viewModel.gridState.collectAsState()
     GridScreen(catList = cats)
 //    CatGrid(

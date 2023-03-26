@@ -11,11 +11,12 @@ import androidx.lifecycle.ViewModel
 import com.itbproject.savethecat.data.Datasource
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.itbproject.savethecat.model.BreedModel
 import com.itbproject.savethecat.model.Cat
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
 @Composable
-fun GridScreen(modifier: Modifier = Modifier, viewModel: GridViewModel = viewModel(), catList: List<Cat>) {
+fun GridScreen(modifier: Modifier = Modifier, catList: List<BreedModel>) {
     val scaffoldState= rememberScaffoldState()
     Scaffold(
         modifier = modifier,
@@ -32,8 +33,8 @@ fun GridScreen(modifier: Modifier = Modifier, viewModel: GridViewModel = viewMod
 @Preview
 @Composable
 fun GridScreenPreview() {
-    val cats = Datasource().loadAffirmations()
-    SaveTheCatTheme {
-        GridScreen(catList = cats)
-    }
+//    val cats = Datasource().loadAffirmations()
+//    SaveTheCatTheme {
+//        GridScreen(catList = cats)
+//    }
 }
