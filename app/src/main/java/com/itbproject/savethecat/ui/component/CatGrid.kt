@@ -29,7 +29,6 @@ fun CatGrid(catList: List<Cat>, modifier: Modifier = Modifier) {
                 CatCard(
                     cat = it,
                     modifier = Modifier
-                        .padding(5.dp)
                         .animateContentSize(
                             animationSpec = spring(
                                 dampingRatio = Spring.DampingRatioLowBouncy,

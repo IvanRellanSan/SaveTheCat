@@ -25,7 +25,7 @@ fun CatCard(cat: Cat, modifier: Modifier = Modifier) {
 
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(0.dp),
         elevation = 0.dp
     ) {
         Column(
