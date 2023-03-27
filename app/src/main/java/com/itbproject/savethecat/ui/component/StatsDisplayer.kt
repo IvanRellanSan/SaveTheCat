@@ -35,7 +35,7 @@ fun StatsDisplayer(text: String, statNumber: Int, modifier: Modifier = Modifier)
 @Preview
 @Composable
 fun StatsDisplayerPreview() {
-    SaveTheCatTheme() {
+    SaveTheCatTheme {
         StatsDisplayer(text = "Preview", 4)
     }
 }

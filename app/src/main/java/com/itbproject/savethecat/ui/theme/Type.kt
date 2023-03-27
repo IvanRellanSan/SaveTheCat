@@ -20,12 +20,12 @@ val Typography = Typography(
     body1 = TextStyle(
         fontFamily = Rowdies,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 14.sp
     ),
     h3 = TextStyle(
         fontFamily = Rowdies,
         fontWeight = FontWeight.Bold,
-        fontSize = 26.sp
+        fontSize = 20.sp
     )
     /* Other default text styles to override
     button = TextStyle(

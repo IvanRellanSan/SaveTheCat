@@ -3,22 +3,16 @@ package com.itbproject.savethecat
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.itbproject.savethecat.data.Datasource
-import com.itbproject.savethecat.ui.component.CatGrid
-import com.itbproject.savethecat.ui.component.GridScreen
-import com.itbproject.savethecat.ui.component.LoginScreen
+import com.itbproject.savethecat.ui.screens.GridScreen
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 

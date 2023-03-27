@@ -1,19 +1,13 @@
-package com.itbproject.savethecat.ui.component
+package com.itbproject.savethecat.ui.screens
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
-import com.itbproject.savethecat.data.Datasource
-import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.itbproject.savethecat.model.BreedModel
-import com.itbproject.savethecat.model.Cat
-import com.itbproject.savethecat.ui.viewmodels.GridViewModel
+import com.itbproject.savethecat.ui.component.CatGrid
+import com.itbproject.savethecat.ui.component.TopBar
 
 @Composable
 fun GridScreen(modifier: Modifier = Modifier, catList: List<BreedModel>) {
