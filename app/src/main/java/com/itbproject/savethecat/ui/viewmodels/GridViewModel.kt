@@ -1,13 +1,10 @@
 package com.itbproject.savethecat.ui.viewmodels
 
-import android.os.Debug
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itbproject.savethecat.data.Datasource
-import com.itbproject.savethecat.model.BreedModel
-import com.itbproject.savethecat.model.Cat
-import com.itbproject.savethecat.network.CatApi
+import com.itbproject.savethecat.data.models.BreedModel
+import com.itbproject.savethecat.data.network.CatApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

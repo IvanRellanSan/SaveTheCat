@@ -1,7 +1,7 @@
-package com.itbproject.savethecat.network
+package com.itbproject.savethecat.data.network
 
-import com.itbproject.savethecat.model.BreedModel
-import com.itbproject.savethecat.model.Image
+import com.itbproject.savethecat.data.models.BreedModel
+import com.itbproject.savethecat.data.models.Image
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType

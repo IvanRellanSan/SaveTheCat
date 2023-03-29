@@ -1,4 +1,4 @@
-package com.itbproject.savethecat.model
+package com.itbproject.savethecat.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

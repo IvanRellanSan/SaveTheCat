@@ -1,4 +1,4 @@
-package com.itbproject.savethecat.model
+package com.itbproject.savethecat.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -24,7 +24,6 @@ data class BreedModel(
     @SerialName(value = "hypoallergenic") val hypoallergenic: Int? = null,
     @SerialName(value = "id") val id: String? = null,
     @SerialName(value = "image") val image: Image? = null,
-    var images: List<Image>? = null,
     @SerialName(value = "indoor") val indoor: Int? = null,
     @SerialName(value = "intelligence") val intelligence: Int? = null,
     @SerialName(value = "lap") val lap: Int? = null,
