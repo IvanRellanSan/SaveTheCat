@@ -1,7 +1,7 @@
 package com.itbproject.savethecat.data.network
 
-import com.itbproject.savethecat.data.models.BreedModel
-import com.itbproject.savethecat.data.models.Image
+import com.itbproject.savethecat.data.models.BreedDto
+import com.itbproject.savethecat.data.models.ImageDto
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
@@ -25,15 +25,15 @@ private val retrofit = Retrofit.Builder()
 interface CatApiService {
     @Headers("x-api-key: $API_KEY")
     @GET("breeds")
-    suspend fun getBreeds(): List<BreedModel>
+    suspend fun getBreeds(): List<BreedDto>
 
     @Headers("x-api-key: $API_KEY")
     @GET("breeds/{breed}")
-    suspend fun getBreed(@Path(value = "breed") breed: String): BreedModel
+    suspend fun getBreed(@Path(value = "breed") breed: String): BreedDto
 
     @Headers("x-api-key: $API_KEY")
     @GET("images/search")
-    suspend fun getImages(@Query(value = "breed_ids") breed_id: String, @Query(value = "limit") limit: Int): List<Image>
+    suspend fun getImages(@Query(value = "breed_ids") breed_id: String, @Query(value = "limit") limit: Int): List<ImageDto>
 }
 
 object CatApi {

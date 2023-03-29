@@ -1,20 +1,21 @@
 package com.itbproject.savethecat.ui.component
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.itbproject.savethecat.data.models.Image
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun ImageCarousel(images: List<Image>) {
+fun ImageCarousel(images: List<String>, modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState()
 
     HorizontalPager(
+        modifier = modifier,
         count = images.size,
         state = pagerState
     ) {

@@ -3,10 +3,10 @@ package com.itbproject.savethecat.ui.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.itbproject.savethecat.data.models.BreedModel
+import com.itbproject.savethecat.data.models.BreedDto
 
 @Composable
-fun StatsGrid(breedModel: BreedModel, modifier: Modifier = Modifier) {
+fun StatsGrid(breedDto: BreedDto, modifier: Modifier = Modifier) {
 
 }
 

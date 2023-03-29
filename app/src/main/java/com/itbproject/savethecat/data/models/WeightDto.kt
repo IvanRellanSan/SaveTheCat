@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Weight(
+data class WeightDto(
     @SerialName(value = "imperial") val imperial: String? = null,
     @SerialName(value = "metric") val metric: String? = null
 )

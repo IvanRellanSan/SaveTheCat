@@ -8,11 +8,15 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.itbproject.savethecat.data.models.BreedModel
+import com.itbproject.savethecat.data.models.BreedDto
+import com.itbproject.savethecat.navigation.MainNavigator
 
 @Composable
-fun CatGrid(catList: List<BreedModel>, modifier: Modifier = Modifier) {
+fun CatGrid(catList: List<BreedDto>, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(2)
@@ -22,6 +26,7 @@ fun CatGrid(catList: List<BreedModel>, modifier: Modifier = Modifier) {
             itemContent = {
                 CatCard(
                     cat = it,
+                    action = { MainNavigator().goToDetailActivity(it.id!!, context = context) },
                     modifier = Modifier
                         .animateContentSize(
                             animationSpec = spring(

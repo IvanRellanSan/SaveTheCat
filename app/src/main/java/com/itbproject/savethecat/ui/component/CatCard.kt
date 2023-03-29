@@ -15,17 +15,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.itbproject.savethecat.data.models.BreedModel
+import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CatCard(cat: BreedModel, modifier: Modifier = Modifier) {
+fun CatCard(cat: BreedDto, modifier: Modifier = Modifier, action: () -> Unit) {
 //    var expanded by remember { mutableStateOf(false) }
 
     Card(
         modifier = modifier
-            .clickable {  },
+            .clickable(
+                onClick = action
+            ),
         shape = RoundedCornerShape(0.dp),
         elevation = 0.dp
     ) {
@@ -77,9 +79,9 @@ fun CatCard(cat: BreedModel, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun CatCardPreview() {
-    val cat = BreedModel()
+    val cat = BreedDto()
 
     SaveTheCatTheme {
-        CatCard(cat)
+        CatCard(cat, action = { })
     }
 }

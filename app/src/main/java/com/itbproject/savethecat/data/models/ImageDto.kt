@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Image(
+data class ImageDto(
     @SerialName(value = "height") val height: Int? = null,
     @SerialName(value = "id") val id: String? = null,
     @SerialName(value = "url") val url: String? = null,

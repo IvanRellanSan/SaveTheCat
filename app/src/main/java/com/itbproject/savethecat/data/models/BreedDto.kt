@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BreedModel(
+data class BreedDto(
     @SerialName(value = "adaptability") val adaptability: Int? = null,
     @SerialName(value = "affection_level") val affection_level: Int? = null,
     @SerialName(value = "alt_names") val alt_names: String? = null,
@@ -23,7 +23,7 @@ data class BreedModel(
     @SerialName(value = "health_issues") val health_issues: Int? = null,
     @SerialName(value = "hypoallergenic") val hypoallergenic: Int? = null,
     @SerialName(value = "id") val id: String? = null,
-    @SerialName(value = "image") val image: Image? = null,
+    @SerialName(value = "image") val image: ImageDto? = null,
     @SerialName(value = "indoor") val indoor: Int? = null,
     @SerialName(value = "intelligence") val intelligence: Int? = null,
     @SerialName(value = "lap") val lap: Int? = null,
@@ -43,6 +43,6 @@ data class BreedModel(
     @SerialName(value = "vcahospitals_url") val vcahospitals_url: String? = null,
     @SerialName(value = "vetstreet_url") val vetstreet_url: String? = null,
     @SerialName(value = "vocalisation") val vocalisation: Int? = null,
-    @SerialName(value = "weight") val weight: Weight? = null,
+    @SerialName(value = "weight") val weight: WeightDto? = null,
     @SerialName(value = "wikipedia_url") val wikipedia_url: String? = null
 )
