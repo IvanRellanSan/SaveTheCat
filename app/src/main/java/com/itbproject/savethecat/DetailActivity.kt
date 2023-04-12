@@ -45,7 +45,7 @@ class DetailActivity : ComponentActivity() {
 fun StartScreen(viewModel: DetailViewmodel = viewModel(), id: String){
     val detailState by viewModel.detailState.collectAsState()
     viewModel.loadBreed(id)
-    DetailScreen(breedModel = detailState!!)
+    DetailScreen(breedModel = detailState)
 }
 
 @Preview(showBackground = true)

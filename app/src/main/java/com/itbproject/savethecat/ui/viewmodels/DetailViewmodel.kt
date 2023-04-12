@@ -14,8 +14,19 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 class DetailViewmodel: ViewModel() {
-    private val _detailState = MutableStateFlow<DetailUiState?>(null)
-    val detailState: StateFlow<DetailUiState?> = _detailState.asStateFlow()
+    private val _detailState = MutableStateFlow(
+        DetailUiState(
+            images = mutableListOf(),
+            name = "",
+            descripcion = "",
+            alt_names = "",
+            origin = "",
+            life_span = "",
+            wikipedia_url = "",
+            stats_map = mapOf()
+        )
+    )
+    val detailState: StateFlow<DetailUiState> = _detailState.asStateFlow()
 
     fun loadBreed(id: String){
         viewModelScope.launch {

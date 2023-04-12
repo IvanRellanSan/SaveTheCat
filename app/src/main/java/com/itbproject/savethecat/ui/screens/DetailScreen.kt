@@ -1,16 +1,19 @@
 package com.itbproject.savethecat.ui.screens
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.itbproject.savethecat.ui.component.Description
 import com.itbproject.savethecat.ui.component.ImageCarousel
+import com.itbproject.savethecat.ui.component.StatsGrid
 import com.itbproject.savethecat.ui.component.TopBar
 import com.itbproject.savethecat.ui.states.DetailUiState
 
@@ -24,22 +27,38 @@ fun DetailScreen(breedModel: DetailUiState, modifier: Modifier = Modifier) {
             TopBar()
         }
     ) {
-        breedModel.let {
-            ImageCarousel(
-                images = breedModel.images,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+//                .verticalScroll(rememberScrollState())
+        ){
+            breedModel.let {
+                ImageCarousel(
+                    images = breedModel.images,
+                    modifier = Modifier
+                )
 
-            Spacer(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-            )
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                )
 
-            Description(
-                title = breedModel.name,
-                description = breedModel.descripcion
-            )
+                Description(
+                    title = breedModel.name,
+                    description = breedModel.descripcion
+                )
+
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                )
+
+                StatsGrid(
+                    mapOfStats = breedModel.stats_map,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
         }
     }
 }
