@@ -10,7 +10,10 @@ import com.itbproject.savethecat.ui.component.CatGrid
 import com.itbproject.savethecat.ui.component.TopBar
 
 @Composable
-fun GridScreen(modifier: Modifier = Modifier, catList: List<BreedDto>) {
+fun GridScreen(
+    modifier: Modifier = Modifier,
+    catList: List<BreedDto>
+) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         modifier = modifier,

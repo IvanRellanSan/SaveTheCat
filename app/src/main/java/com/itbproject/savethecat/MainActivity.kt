@@ -7,15 +7,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.itbproject.savethecat.ui.screens.GridScreen
 import com.itbproject.savethecat.ui.screens.LoginScreen
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
-import com.itbproject.savethecat.ui.viewmodels.GridViewModel
+import com.itbproject.savethecat.ui.viewmodels.MainViewmodel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +32,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginStartScreen() {
-    LoginScreen(onSignInClick = { })
+fun LoginStartScreen(
+    viewModel: MainViewmodel = viewModel()
+) {
+    LoginScreen(
+        onSignInClick = { }
+    )
 //    CatGrid(
 //        catList,
 //        modifier = Modifier

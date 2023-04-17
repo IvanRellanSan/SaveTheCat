@@ -15,7 +15,10 @@ import com.itbproject.savethecat.ui.component.TopBar
 import com.itbproject.savethecat.ui.models.DetailUiState
 
 @Composable
-fun DetailScreen(breedModel: DetailUiState, modifier: Modifier = Modifier) {
+fun DetailScreen(
+    breedModel: DetailUiState,
+    modifier: Modifier = Modifier
+){
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         modifier = modifier,

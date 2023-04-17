@@ -2,7 +2,7 @@ package com.itbproject.savethecat.navigation
 
 import android.content.Context
 import android.content.Intent
-import com.itbproject.savethecat.DetailActivity
+import com.itbproject.savethecat.ui.views.DetailActivity
 
 class GridNavigator {
     fun goToDetailActivity(id: String, context: Context){

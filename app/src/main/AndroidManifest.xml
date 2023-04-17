@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SaveTheCat"
         tools:targetApi="31">
         <activity
-            android:name=".GridActivity"
+            android:name=".ui.views.GridActivity"
             android:exported="false"
             android:label="@string/detail_activity_name"
             android:theme="@style/Theme.SaveTheCat" >
@@ -24,7 +24,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".ui.views.DetailActivity"
             android:exported="false"
             android:label="@string/detail_activity_name"
             android:theme="@style/Theme.SaveTheCat" >

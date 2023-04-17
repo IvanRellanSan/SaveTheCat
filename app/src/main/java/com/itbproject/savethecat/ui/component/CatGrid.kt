@@ -14,7 +14,10 @@ import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.navigation.GridNavigator
 
 @Composable
-fun CatGrid(catList: List<BreedDto>, modifier: Modifier = Modifier) {
+fun CatGrid(
+    catList: List<BreedDto>,
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
 
     LazyVerticalGrid(

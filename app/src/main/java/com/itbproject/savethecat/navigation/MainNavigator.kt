@@ -2,7 +2,7 @@ package com.itbproject.savethecat.navigation
 
 import android.content.Context
 import android.content.Intent
-import com.itbproject.savethecat.GridActivity
+import com.itbproject.savethecat.ui.views.GridActivity
 
 class MainNavigator {
     fun goToGridActivity(context: Context){

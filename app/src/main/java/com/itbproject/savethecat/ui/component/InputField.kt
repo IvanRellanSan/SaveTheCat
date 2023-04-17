@@ -8,13 +8,21 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.itbproject.savethecat.ui.theme.Shapes
 
 @Composable
-fun InputField(modifier: Modifier = Modifier, title: String) {
+fun InputField(
+    modifier: Modifier = Modifier,
+    title: String,
+    value: String,
+    updateValue: (String) -> Unit,
+    showValue: Boolean = true
+) {
     Column(
         modifier = modifier
     ) {
@@ -24,14 +32,15 @@ fun InputField(modifier: Modifier = Modifier, title: String) {
             text = title
         )
         TextField(
-            value = "",
-            onValueChange = { },
+            value = value,
+            onValueChange = updateValue,
             shape = RoundedCornerShape(50),
             colors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
-            )
+            ),
+            visualTransformation = if (showValue) VisualTransformation.None else PasswordVisualTransformation()
         )
     }
 }
@@ -39,5 +48,5 @@ fun InputField(modifier: Modifier = Modifier, title: String) {
 @Preview
 @Composable
 fun InputFieldPreview() {
-    InputField(title = "Preview")
+    InputField(title = "Preview", value = "Preview Value", updateValue = { })
 }

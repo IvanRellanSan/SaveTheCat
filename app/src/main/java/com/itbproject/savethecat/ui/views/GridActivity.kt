@@ -34,7 +34,9 @@ class GridActivity : ComponentActivity() {
 }
 
 @Composable
-fun StartScreen(viewModel: GridViewModel = viewModel()) {
+fun StartScreen(
+    viewModel: GridViewModel = viewModel()
+) {
     viewModel.getBreeds()
     val cats by viewModel.gridState.collectAsState()
     GridScreen(catList = cats)
