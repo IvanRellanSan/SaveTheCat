@@ -1,4 +1,4 @@
-package com.itbproject.savethecat.ui.states
+package com.itbproject.savethecat.ui.models
 
 data class DetailUiState (
     val images: List<String>,

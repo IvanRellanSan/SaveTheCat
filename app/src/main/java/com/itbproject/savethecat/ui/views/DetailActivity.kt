@@ -1,4 +1,4 @@
-package com.itbproject.savethecat
+package com.itbproject.savethecat.ui.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

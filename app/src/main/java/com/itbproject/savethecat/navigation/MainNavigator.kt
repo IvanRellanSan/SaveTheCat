@@ -2,12 +2,11 @@ package com.itbproject.savethecat.navigation
 
 import android.content.Context
 import android.content.Intent
-import com.itbproject.savethecat.DetailActivity
+import com.itbproject.savethecat.GridActivity
 
 class MainNavigator {
-    fun goToDetailActivity(id: String, context: Context){
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("id", id)
+    fun goToGridActivity(context: Context){
+        val intent = Intent(context, GridActivity::class.java)
         context.startActivity(intent)
     }
 }

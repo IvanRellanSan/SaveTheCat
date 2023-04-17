@@ -1,4 +1,4 @@
-package com.itbproject.savethecat
+package com.itbproject.savethecat.ui.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,11 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.itbproject.savethecat.ui.screens.GridScreen
-import com.itbproject.savethecat.ui.screens.LoginScreen
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
-class MainActivity : ComponentActivity() {
+class GridActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginStartScreen()
+                    StartScreen()
                 }
             }
         }
@@ -35,8 +34,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginStartScreen() {
-    LoginScreen(onSignInClick = { })
+fun StartScreen(viewModel: GridViewModel = viewModel()) {
+    viewModel.getBreeds()
+    val cats by viewModel.gridState.collectAsState()
+    GridScreen(catList = cats)
 //    CatGrid(
 //        catList,
 //        modifier = Modifier
@@ -46,8 +47,8 @@ fun LoginStartScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPreview() {
+fun DefaultPreview() {
     SaveTheCatTheme {
-        LoginStartScreen()
+        StartScreen()
     }
 }

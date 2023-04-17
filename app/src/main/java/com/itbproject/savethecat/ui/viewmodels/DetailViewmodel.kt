@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itbproject.savethecat.data.models.ImageDto
 import com.itbproject.savethecat.data.network.CatApi
-import com.itbproject.savethecat.ui.states.DetailUiState
-import com.itbproject.savethecat.ui.states.mapper.BreedDtoToDetailUiState
+import com.itbproject.savethecat.ui.models.DetailUiState
+import com.itbproject.savethecat.ui.models.mapper.BreedDtoToDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

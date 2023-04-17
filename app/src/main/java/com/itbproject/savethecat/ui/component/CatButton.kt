@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun CatButton(modifier: Modifier = Modifier, text: String) {
+fun CatButton(modifier: Modifier = Modifier, text: String, action: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = action,
         modifier = modifier,
         shape = RoundedCornerShape(50)
     ) {
@@ -23,5 +23,5 @@ fun CatButton(modifier: Modifier = Modifier, text: String) {
 @Preview
 @Composable
 fun CatButtonPreview() {
-    CatButton(text = "Preview")
+    CatButton(text = "Preview", action = { })
 }

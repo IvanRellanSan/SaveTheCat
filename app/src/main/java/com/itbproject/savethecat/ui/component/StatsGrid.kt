@@ -1,16 +1,11 @@
 package com.itbproject.savethecat.ui.component
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.itbproject.savethecat.data.models.BreedDto
-import com.itbproject.savethecat.navigation.MainNavigator
 
 @Composable
 fun StatsGrid(mapOfStats: Map<String, Int>, modifier: Modifier = Modifier) {

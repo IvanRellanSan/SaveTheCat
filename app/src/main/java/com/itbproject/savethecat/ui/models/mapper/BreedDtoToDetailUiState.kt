@@ -1,8 +1,8 @@
-package com.itbproject.savethecat.ui.states.mapper
+package com.itbproject.savethecat.ui.models.mapper
 
 import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.data.models.ImageDto
-import com.itbproject.savethecat.ui.states.DetailUiState
+import com.itbproject.savethecat.ui.models.DetailUiState
 
 class BreedDtoToDetailUiState {
     fun map(breedDto: BreedDto, imageList: List<ImageDto>? = null) : DetailUiState{

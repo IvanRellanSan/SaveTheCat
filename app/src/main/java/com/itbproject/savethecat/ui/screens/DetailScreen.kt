@@ -1,9 +1,6 @@
 package com.itbproject.savethecat.ui.screens
 
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -15,7 +12,7 @@ import com.itbproject.savethecat.ui.component.Description
 import com.itbproject.savethecat.ui.component.ImageCarousel
 import com.itbproject.savethecat.ui.component.StatsGrid
 import com.itbproject.savethecat.ui.component.TopBar
-import com.itbproject.savethecat.ui.states.DetailUiState
+import com.itbproject.savethecat.ui.models.DetailUiState
 
 @Composable
 fun DetailScreen(breedModel: DetailUiState, modifier: Modifier = Modifier) {

@@ -6,16 +6,24 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.itbproject.savethecat.R
+import com.itbproject.savethecat.navigation.MainNavigator
 import com.itbproject.savethecat.ui.component.CatButton
 import com.itbproject.savethecat.ui.component.CatTextButton
 import com.itbproject.savethecat.ui.component.InputField
+import com.itbproject.savethecat.ui.models.LoginUiModel
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onSignInClick: (LoginUiModel)->Unit
+) {
+    val context = LocalContext.current
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -53,6 +61,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 
         CatButton(
             text = "Sign in",
+            action = { MainNavigator().goToGridActivity(context = context) },
             modifier = Modifier
                 .size(width = 150.dp, height = 40.dp)
         )
@@ -70,6 +79,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Composable
 fun LoginScreenPreview() {
     Surface {
-        LoginScreen()
+        LoginScreen(onSignInClick = { })
     }
 }
