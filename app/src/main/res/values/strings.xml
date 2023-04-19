@@ -4,4 +4,8 @@
 
     <string name="SadCat">Sad cat</string>
     <string name="SadDescription">This is a sad cat which indicates there has been an error with the server. Please, try again later!</string>
+
+    <string name="UserNameTitle">Name</string>
+    <string name="MailTitle">Mail</string>
+    <string name="PasswordTitle">Password</string>
 </resources>
