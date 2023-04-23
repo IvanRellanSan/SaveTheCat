@@ -1,5 +1,6 @@
 package com.itbproject.savethecat.ui.viewmodels
 
+import android.os.Debug
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,14 +16,37 @@ class GridViewModel : ViewModel() {
     private val _gridState = MutableStateFlow<List<BreedDto>>(mutableListOf())
     val gridState: StateFlow<List<BreedDto>> = _gridState.asStateFlow()
 
-    fun getBreeds() {
+    init{
         viewModelScope.launch {
             try {
                 _gridState.value = CatApi.retrofitService.getBreeds()
+                Log.i("ORDER", _gridState.value.toString())
             }
             catch (e: IOException){
                 Log.d("ERROR", e.toString())
             }
         }
+    }
+
+    fun getBreeds() {
+//        viewModelScope.launch {
+//            try {
+//                _gridState.value = CatApi.retrofitService.getBreeds()
+//                Log.i("ORDER", _gridState.value.toString())
+//            }
+//            catch (e: IOException){
+//                Log.d("ERROR", e.toString())
+//            }
+//        }
+    }
+
+    fun sortByName(){
+        _gridState.value = _gridState.value.sortedBy { it.name }
+        Log.i("ORDER", _gridState.value.toString())
+    }
+
+    fun sortByCountry(){
+        _gridState.value = _gridState.value.sortedBy { it.origin }
+        Log.i("ORDER", _gridState.value.toString())
     }
 }

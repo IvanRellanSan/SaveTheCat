@@ -8,21 +8,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.ui.component.CatGrid
 import com.itbproject.savethecat.ui.component.TopBar
+import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
 @Composable
 fun GridScreen(
     modifier: Modifier = Modifier,
-    catList: List<BreedDto>
+    catList: List<BreedDto>,
+    viewModel: GridViewModel
 ) {
     val scaffoldState = rememberScaffoldState()
+
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            TopBar()
+            TopBar(viewModel)
         }
     ) {
-        CatGrid(catList = catList)
+        CatGrid(
+            catList = catList
+        )
     }
 
 }

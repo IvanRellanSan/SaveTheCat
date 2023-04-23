@@ -37,9 +37,12 @@ class GridActivity : ComponentActivity() {
 fun StartScreen(
     viewModel: GridViewModel = viewModel()
 ) {
-    viewModel.getBreeds()
     val cats by viewModel.gridState.collectAsState()
-    GridScreen(catList = cats)
+    viewModel.getBreeds()
+    GridScreen(
+        catList = cats,
+        viewModel = viewModel
+    )
 //    CatGrid(
 //        catList,
 //        modifier = Modifier

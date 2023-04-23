@@ -1,38 +1,75 @@
 package com.itbproject.savethecat.ui.component
 
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.R
+import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
 @Composable
-fun TopBar() {
+fun TopBar(viewModel: GridViewModel) {
+    var menuExpanded by remember{
+        mutableStateOf(false)
+    }
+
     TopAppBar(
         navigationIcon = {
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Filled.Menu, contentDescription = "Abrir menú desplegable")
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = "Abrir menú desplegable"
+                )
             }
         },
-        title = { Text(text = stringResource(id = R.string.app_name)) },
+        title = {
+            Text(
+                text = stringResource(id = R.string.app_name)
+            ) },
         actions = {
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorito")
+            IconButton(
+                onClick = {
+                    menuExpanded = !menuExpanded
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Sort,
+                    contentDescription = "Sort"
+                )
             }
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = "Buscar")
+            DropdownMenu(
+                expanded = menuExpanded,
+                onDismissRequest = {
+                    menuExpanded = false
+                }
+            ) {
+                DropdownMenuItem(
+                    content = {
+                        Text(
+                            text = "Alphabetically"
+                        ) },
+                    onClick = {
+                        viewModel.sortByName()
+                        menuExpanded = false
+                    }
+                )
+                DropdownMenuItem(
+                    content = {
+                        Text(
+                            text = "By country"
+                        ) },
+                    onClick = {
+                        viewModel.sortByCountry()
+                        menuExpanded = false
+                    }
+                )
             }
-            IconButton(onClick = { }) {
-                Icon(imageVector = Icons.Filled.MoreVert, contentDescription = "Más")
-            }
+
         }
     )
 }
@@ -40,5 +77,5 @@ fun TopBar() {
 @Preview
 @Composable
 fun TopBarPreview() {
-    TopBar()
+    TopBar(GridViewModel())
 }

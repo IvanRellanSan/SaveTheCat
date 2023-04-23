@@ -22,10 +22,10 @@ fun DetailScreen(
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         modifier = modifier,
-        scaffoldState = scaffoldState,
-        topBar = {
-            TopBar()
-        }
+//        scaffoldState = scaffoldState,
+//        topBar = {
+//            TopBar()
+//        }
     ) {
         Column (
             modifier = Modifier
