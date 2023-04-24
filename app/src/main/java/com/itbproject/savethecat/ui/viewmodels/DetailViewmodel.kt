@@ -21,6 +21,7 @@ class DetailViewmodel: ViewModel() {
             descripcion = "",
             alt_names = "",
             origin = "",
+            origin_code = "",
             life_span = "",
             wikipedia_url = "",
             stats_map = mapOf()
@@ -29,15 +30,18 @@ class DetailViewmodel: ViewModel() {
     val detailState: StateFlow<DetailUiState> = _detailState.asStateFlow()
 
     fun loadBreed(id: String){
-        viewModelScope.launch {
-            try {
-                val breedDetail = CatApi.retrofitService.getBreed(id)
-                val imagesList: List<ImageDto> = CatApi.retrofitService.getImages(id, 15)
-                _detailState.value = BreedDtoToDetailUiState().map(breedDetail, imagesList)
-            }
-            catch (e: IOException){
-                Log.d("ERROR", e.toString())
+        if (_detailState.value.images.isEmpty()){
+            viewModelScope.launch {
+                try {
+                    val breedDetail = CatApi.retrofitService.getBreed(id)
+                    val imagesList: List<ImageDto> = CatApi.retrofitService.getImages(id, 15)
+                    _detailState.value = BreedDtoToDetailUiState().map(breedDetail, imagesList)
+                }
+                catch (e: IOException){
+                    Log.d("ERROR", e.toString())
+                }
             }
         }
+
     }
 }

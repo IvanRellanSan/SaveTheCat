@@ -17,10 +17,13 @@ class GridViewModel : ViewModel() {
     val gridState: StateFlow<List<BreedDto>> = _gridState.asStateFlow()
 
     init{
+        getBreeds()
+    }
+
+    private fun getBreeds() {
         viewModelScope.launch {
             try {
                 _gridState.value = CatApi.retrofitService.getBreeds()
-                Log.i("ORDER", _gridState.value.toString())
             }
             catch (e: IOException){
                 Log.d("ERROR", e.toString())
@@ -28,25 +31,11 @@ class GridViewModel : ViewModel() {
         }
     }
 
-    fun getBreeds() {
-//        viewModelScope.launch {
-//            try {
-//                _gridState.value = CatApi.retrofitService.getBreeds()
-//                Log.i("ORDER", _gridState.value.toString())
-//            }
-//            catch (e: IOException){
-//                Log.d("ERROR", e.toString())
-//            }
-//        }
-    }
-
     fun sortByName(){
         _gridState.value = _gridState.value.sortedBy { it.name }
-        Log.i("ORDER", _gridState.value.toString())
     }
 
     fun sortByCountry(){
         _gridState.value = _gridState.value.sortedBy { it.origin }
-        Log.i("ORDER", _gridState.value.toString())
     }
 }

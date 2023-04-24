@@ -6,6 +6,7 @@ data class DetailUiState (
     val descripcion: String,
     val alt_names: String,
     val origin: String,
+    val origin_code: String,
     val life_span: String,
     val wikipedia_url: String,
     val stats_map: Map<String, Int>

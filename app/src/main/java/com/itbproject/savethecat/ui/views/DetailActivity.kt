@@ -1,6 +1,7 @@
 package com.itbproject.savethecat.ui.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,6 +46,7 @@ class DetailActivity : ComponentActivity() {
 fun StartScreen(viewModel: DetailViewmodel = viewModel(), id: String){
     val detailState by viewModel.detailState.collectAsState()
     viewModel.loadBreed(id)
+    Log.i("Eledu comprobaciones", "llamado jeje")
     DetailScreen(breedModel = detailState)
 }
 

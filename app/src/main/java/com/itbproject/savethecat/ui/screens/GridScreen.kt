@@ -9,12 +9,14 @@ import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.ui.component.CatGrid
 import com.itbproject.savethecat.ui.component.TopBar
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.itbproject.savethecat.ui.component.SortBy
 
 @Composable
 fun GridScreen(
     modifier: Modifier = Modifier,
     catList: List<BreedDto>,
-    viewModel: GridViewModel
+    viewModel: GridViewModel = viewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
 
@@ -22,7 +24,12 @@ fun GridScreen(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            TopBar(viewModel)
+            TopBar{
+                when(it) {
+                    SortBy.Alphabetically -> {viewModel.sortByName()}
+                    SortBy.Country -> {viewModel.sortByCountry()}
+                }
+            }
         }
     ) {
         CatGrid(

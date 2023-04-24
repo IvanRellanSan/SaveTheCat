@@ -18,6 +18,7 @@ class BreedDtoToDetailUiState {
             descripcion = breedDto.description!!,
             alt_names = breedDto.alt_names!!,
             origin = breedDto.origin!!,
+            origin_code = breedDto.country_code!!,
             life_span = breedDto.life_span!!,
             wikipedia_url = breedDto.wikipedia_url!!,
             stats_map = mapOf(

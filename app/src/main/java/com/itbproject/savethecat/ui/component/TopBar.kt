@@ -1,6 +1,5 @@
 package com.itbproject.savethecat.ui.component
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -8,11 +7,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.R
-import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
 @Composable
-fun TopBar(viewModel: GridViewModel) {
+fun TopBar(
+    soryBy: (SortBy)-> Unit
+) {
     var menuExpanded by remember{
+        mutableStateOf(false)
+    }
+
+    var filterMenuExpanded by remember{
         mutableStateOf(false)
     }
 
@@ -54,7 +58,7 @@ fun TopBar(viewModel: GridViewModel) {
                             text = "Alphabetically"
                         ) },
                     onClick = {
-                        viewModel.sortByName()
+                        soryBy(SortBy.Alphabetically)
                         menuExpanded = false
                     }
                 )
@@ -64,18 +68,32 @@ fun TopBar(viewModel: GridViewModel) {
                             text = "By country"
                         ) },
                     onClick = {
-                        viewModel.sortByCountry()
+                        soryBy(SortBy.Country)
                         menuExpanded = false
                     }
                 )
             }
+            IconButton(
+                onClick = {
 
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.FilterAlt,
+                    contentDescription = "Filter"
+                )
+            }
         }
     )
+}
+
+sealed class SortBy{
+    object Alphabetically: SortBy()
+    object Country: SortBy()
 }
 
 @Preview
 @Composable
 fun TopBarPreview() {
-    TopBar(GridViewModel())
+    TopBar({ })
 }

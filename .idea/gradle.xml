@@ -9,8 +9,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="/dades/IvanRellan/android-studio-2021.3.1.17-linux/AndroidProjects/SaveTheCat2" />
+            <option value="/dades/IvanRellan/android-studio-2021.3.1.17-linux/AndroidProjects/SaveTheCat2/app" />
           </set>
         </option>
       </GradleProjectSettings>

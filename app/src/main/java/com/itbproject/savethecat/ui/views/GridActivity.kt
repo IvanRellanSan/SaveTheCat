@@ -17,6 +17,7 @@ import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 
 class GridActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -38,7 +39,7 @@ fun StartScreen(
     viewModel: GridViewModel = viewModel()
 ) {
     val cats by viewModel.gridState.collectAsState()
-    viewModel.getBreeds()
+    //viewModel.getBreeds()
     GridScreen(
         catList = cats,
         viewModel = viewModel
