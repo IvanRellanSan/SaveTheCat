@@ -2,8 +2,12 @@ package com.itbproject.savethecat.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,15 +16,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.itbproject.savethecat.ui.component.*
 import com.itbproject.savethecat.ui.models.DetailUiState
+import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
     breedModel: DetailUiState,
     modifier: Modifier = Modifier
-){
+) {
     val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
 
-    var webOpened by remember{
+    var webOpened by remember {
         mutableStateOf(false)
     }
 
@@ -31,7 +37,7 @@ fun DetailScreen(
 //            TopBar()
 //        }
     ) {
-        LazyColumn{
+        LazyColumn {
             item {
                 ImageCarousel(
                     images = breedModel.images,
@@ -42,7 +48,9 @@ fun DetailScreen(
                     modifier = Modifier
                         .padding(top = 10.dp)
                 )
+            }
 
+            item {
                 Description(
                     title = breedModel.name,
                     description = breedModel.descripcion
@@ -52,22 +60,48 @@ fun DetailScreen(
                     modifier = Modifier
                         .padding(top = 10.dp)
                 )
+            }
 
+            item {
                 Row {
                     Text(
                         text = "Country code: " + breedModel.origin_code
                     )
                 }
-
-                CatTextButton(
-                    onClick = {
-                    },
-                    text = "See on wikipedia!"
-                )
-
-
             }
+
+            items(breedModel.stats_map.toList().chunked(2)) { items ->
+                VerticalGrid(columnCount = 2, items = items, spacedBy = 16.dp) {
+                    StatsDisplayer(
+                        text = it.first,
+                        statNumber = it.second,
+                        modifier = Modifier
+                    )
+                }
+            }
+
+            coroutineScope.launch {
+                item {
+                    WebView(
+                        url = breedModel.wikipedia_url
+                    )
+                }
+            }
+/*            item{
+                VerticalGrid(
+                    columnCount = 2,
+                    items = breedModel.stats_map.toList()
+                ) {
+                    Text(text = "Hola")
+                    *//*StatsDisplayer(
+                        text = it.first,
+                        statNumber = it.second,
+                        modifier = Modifier
+                    )*//*
+                }
+            }*/
         }
+    }
 
 //        Column (
 //            modifier = Modifier
@@ -101,7 +135,7 @@ fun DetailScreen(
 //                )
 //            }
 //        }
-    }
+
 }
 
 @Preview
