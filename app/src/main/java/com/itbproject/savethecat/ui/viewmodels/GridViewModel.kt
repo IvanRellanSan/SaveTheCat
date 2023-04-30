@@ -49,10 +49,10 @@ class GridViewModel : ViewModel() {
     }
 
     fun filterByCountry(countryCode: String){
+        _gridState.value = mutableListOf()
         if (countryCode != "ANY"){
             viewModelScope.launch {
-                _gridState.value = CatApi.retrofitService.getBreeds()
-                val filteredList = _gridState.value.filter { it.country_code == countryCode }
+                val filteredList = CatApi.retrofitService.getBreeds().filter { it.country_code == countryCode }
 
                 if (filteredList.isNotEmpty()){
                     _gridState.value = filteredList
