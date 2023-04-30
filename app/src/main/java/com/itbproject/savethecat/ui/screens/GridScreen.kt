@@ -10,6 +10,7 @@ import com.itbproject.savethecat.ui.component.CatGrid
 import com.itbproject.savethecat.ui.component.TopBar
 import com.itbproject.savethecat.ui.viewmodels.GridViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.itbproject.savethecat.ui.component.FilterBy
 import com.itbproject.savethecat.ui.component.SortBy
 
 @Composable
@@ -24,12 +25,16 @@ fun GridScreen(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            TopBar{
-                when(it) {
-                    SortBy.Alphabetically -> {viewModel.sortByName()}
-                    SortBy.Country -> {viewModel.sortByCountry()}
-                }
-            }
+            TopBar(
+                {
+                    when(it) {
+                        SortBy.Alphabetically -> { viewModel.sortByName() }
+                        SortBy.Country -> { viewModel.sortByCountry() }
+                    }
+            },{
+                    viewModel.filterByCountry(it)
+              },
+            countryList = viewModel.countryList)
         }
     ) {
         CatGrid(

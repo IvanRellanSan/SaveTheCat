@@ -10,8 +10,10 @@ import com.itbproject.savethecat.R
 
 @Composable
 fun TopBar(
-    soryBy: (SortBy)-> Unit
-) {
+    sortBy: (SortBy) -> Unit,
+    filterBy: (String) -> Unit,
+    countryList: List<String> = mutableListOf("")
+    ) {
     var menuExpanded by remember{
         mutableStateOf(false)
     }
@@ -58,7 +60,7 @@ fun TopBar(
                             text = "Alphabetically"
                         ) },
                     onClick = {
-                        soryBy(SortBy.Alphabetically)
+                        sortBy(SortBy.Alphabetically)
                         menuExpanded = false
                     }
                 )
@@ -68,20 +70,39 @@ fun TopBar(
                             text = "By country"
                         ) },
                     onClick = {
-                        soryBy(SortBy.Country)
+                        sortBy(SortBy.Country)
                         menuExpanded = false
                     }
                 )
             }
             IconButton(
                 onClick = {
-
+                    filterMenuExpanded = !filterMenuExpanded
                 }
             ) {
                 Icon(
                     imageVector = Icons.Filled.FilterAlt,
                     contentDescription = "Filter"
                 )
+            }
+            DropdownMenu(
+                expanded = filterMenuExpanded,
+                onDismissRequest = {
+                    filterMenuExpanded = false
+                }
+            ) {
+                for(item in countryList){
+                    DropdownMenuItem(
+                        content = {
+                            Text(
+                                text = item
+                            ) },
+                        onClick = {
+                            filterBy(item)
+                            filterMenuExpanded = false
+                        }
+                    )
+                }
             }
         }
     )
@@ -92,8 +113,12 @@ sealed class SortBy{
     object Country: SortBy()
 }
 
+sealed class FilterBy{
+    object Country: FilterBy()
+}
+
 @Preview
 @Composable
 fun TopBarPreview() {
-    TopBar({ })
+    TopBar({ }, { })
 }

@@ -16,6 +16,8 @@ class GridViewModel : ViewModel() {
     private val _gridState = MutableStateFlow<List<BreedDto>>(mutableListOf())
     val gridState: StateFlow<List<BreedDto>> = _gridState.asStateFlow()
 
+    val countryList: MutableList<String> = mutableListOf("ANY")
+
     init{
         getBreeds()
     }
@@ -24,6 +26,13 @@ class GridViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _gridState.value = CatApi.retrofitService.getBreeds()
+                if (countryList.size <= 1){
+                    for (i in 0 until _gridState.value.size){
+                        if (!countryList.contains(_gridState.value[i].country_code!!)){
+                            countryList += _gridState.value[i].country_code!!
+                        }
+                    }
+                }
             }
             catch (e: IOException){
                 Log.d("ERROR", e.toString())
@@ -37,5 +46,25 @@ class GridViewModel : ViewModel() {
 
     fun sortByCountry(){
         _gridState.value = _gridState.value.sortedBy { it.origin }
+    }
+
+    fun filterByCountry(countryCode: String){
+        if (countryCode != "ANY"){
+            viewModelScope.launch {
+                _gridState.value = CatApi.retrofitService.getBreeds()
+                val filteredList = _gridState.value.filter { it.country_code == countryCode }
+
+                if (filteredList.isNotEmpty()){
+                    _gridState.value = filteredList
+                }
+            }
+        }
+        else{
+            deleteFilter()
+        }
+    }
+
+    private fun deleteFilter(){
+        getBreeds()
     }
 }
