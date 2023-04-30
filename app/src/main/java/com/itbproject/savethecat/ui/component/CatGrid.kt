@@ -13,10 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.navigation.GridNavigator
+import com.itbproject.savethecat.ui.models.BreedUiModel
 
 @Composable
 fun CatGrid(
-    catList: List<BreedDto>,
+    catList: List<BreedUiModel>,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -37,7 +38,7 @@ fun CatGrid(
                 itemContent = {
                     CatCard(
                         cat = it,
-                        action = { GridNavigator().goToDetailActivity(it.id!!, context = context) },
+                        action = { GridNavigator().goToDetailActivity(it.id, context = context) },
                         modifier = Modifier
                             .animateContentSize(
                                 animationSpec = spring(

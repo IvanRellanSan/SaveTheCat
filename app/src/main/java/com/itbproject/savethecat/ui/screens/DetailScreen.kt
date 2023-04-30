@@ -3,24 +3,20 @@ package com.itbproject.savethecat.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.itbproject.savethecat.ui.component.*
-import com.itbproject.savethecat.ui.models.DetailUiState
+import com.itbproject.savethecat.ui.models.DetailUiModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
-    breedModel: DetailUiState,
+    breedModel: DetailUiModel,
     modifier: Modifier = Modifier
 ) {
     val scaffoldState = rememberScaffoldState()

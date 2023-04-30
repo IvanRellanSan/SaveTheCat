@@ -16,11 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.itbproject.savethecat.data.models.BreedDto
+import com.itbproject.savethecat.ui.models.BreedUiModel
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CatCard(cat: BreedDto, modifier: Modifier = Modifier, action: () -> Unit) {
+fun CatCard(cat: BreedUiModel, modifier: Modifier = Modifier, action: () -> Unit) {
 //    var expanded by remember { mutableStateOf(false) }
 
     Card(
@@ -36,17 +37,18 @@ fun CatCard(cat: BreedDto, modifier: Modifier = Modifier, action: () -> Unit) {
                 .background(color = MaterialTheme.colors.background)
         ) {
             GlideImage(
-                model = cat.image?.url,
+                model = cat.breedImageUrl!!,
                 contentDescription = "Cat",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(200.dp)
             )
 
+
             Text(
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally),
-                text = cat.name!!,
+                text = cat.breedName,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h3
             )
@@ -59,7 +61,7 @@ fun CatCard(cat: BreedDto, modifier: Modifier = Modifier, action: () -> Unit) {
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally)
                     .padding(start = 16.dp, end = 16.dp),
-                text = cat.description!!,
+                text = cat.breedDescription,
                 style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Justify,
                 overflow = TextOverflow.Ellipsis,
@@ -79,9 +81,9 @@ fun CatCard(cat: BreedDto, modifier: Modifier = Modifier, action: () -> Unit) {
 @Preview
 @Composable
 fun CatCardPreview() {
-    val cat = BreedDto()
-
-    SaveTheCatTheme {
-        CatCard(cat, action = { })
-    }
+//    val cat = BreedDto()
+//
+//    SaveTheCatTheme {
+//        CatCard(cat, action = { })
+//    }
 }

@@ -1,6 +1,6 @@
 package com.itbproject.savethecat.ui.models
 
-data class DetailUiState (
+data class DetailUiModel (
     val images: List<String>,
     val name: String,
     val descripcion: String,

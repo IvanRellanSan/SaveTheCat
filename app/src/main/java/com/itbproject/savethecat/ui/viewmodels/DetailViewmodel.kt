@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itbproject.savethecat.data.models.ImageDto
 import com.itbproject.savethecat.data.network.CatApi
-import com.itbproject.savethecat.ui.models.DetailUiState
+import com.itbproject.savethecat.ui.models.DetailUiModel
 import com.itbproject.savethecat.ui.models.mapper.BreedDtoToDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import java.io.IOException
 
 class DetailViewmodel: ViewModel() {
     private val _detailState = MutableStateFlow(
-        DetailUiState(
+        DetailUiModel(
             images = mutableListOf(),
             name = "",
             descripcion = "",
@@ -27,7 +27,7 @@ class DetailViewmodel: ViewModel() {
             stats_map = mapOf()
         )
     )
-    val detailState: StateFlow<DetailUiState> = _detailState.asStateFlow()
+    val detailState: StateFlow<DetailUiModel> = _detailState.asStateFlow()
 
     fun loadBreed(id: String){
         if (_detailState.value.images.isEmpty()){

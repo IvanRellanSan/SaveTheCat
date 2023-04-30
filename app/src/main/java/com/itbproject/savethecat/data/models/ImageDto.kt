@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ImageDto(
     @SerialName(value = "breeds") val breeds: List<BreedDto>? = null,
-    @SerialName(value = "height") val height: Int? = null,
-    @SerialName(value = "id") val id: String? = null,
-    @SerialName(value = "url") val url: String? = null,
-    @SerialName(value = "width") val width: Int? = null
+    @SerialName(value = "height") val height: Int,
+    @SerialName(value = "id") val id: String,
+    @SerialName(value = "url") val url: String,
+    @SerialName(value = "width") val width: Int
 )
