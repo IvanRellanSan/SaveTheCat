@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SaveTheCat</string>
+    <string name="detail_activity_name">Details</string>
+
+    <string name="SadCat">Sad cat</string>
+    <string name="SadDescription">This is a sad cat which indicates there has been an error with the server. Please, try again later!</string>
+
+    <string name="UserNameTitle">Name</string>
+    <string name="MailTitle">Mail</string>
+    <string name="PasswordTitle">Password</string>
+
+    <string name="WikipediaText">See on wikipedia</string>
+    <string name="NonResult">UNKNOWN</string>
 </resources>

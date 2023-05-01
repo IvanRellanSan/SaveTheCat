@@ -1,4 +1,4 @@
-package com.itbproject.savethecat
+package com.itbproject.savethecat.ui.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,16 +7,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.itbproject.savethecat.ui.screens.LoginScreen
+import com.itbproject.savethecat.ui.screens.DetailScreen
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
-import com.itbproject.savethecat.ui.viewmodels.MainViewmodel
+import com.itbproject.savethecat.ui.viewmodels.DetailViewmodel
 
-class MainActivity : ComponentActivity() {
+class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val intent = intent
+        var id = ""
+
+        intent.extras?.let {
+            id = it.getString("id")!!
+        }
+
         setContent {
             SaveTheCatTheme {
                 // A surface container using the 'background' color from the theme
@@ -24,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginStartScreen()
+                    StartScreen(id = id)
                 }
             }
         }
@@ -32,21 +42,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginStartScreen() {
-
-
-    LoginScreen()
-//    CatGrid(
-//        catList,
-//        modifier = Modifier
-//            .fillMaxSize()
-//    )
+fun StartScreen(viewModel: DetailViewmodel = viewModel(), id: String){
+    val detailState by viewModel.detailState.collectAsState()
+    viewModel.loadBreed(id)
+    DetailScreen(breedModel = detailState)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPreview() {
-    SaveTheCatTheme {
-        LoginStartScreen()
-    }
+fun DetailPreview() {
+
 }
