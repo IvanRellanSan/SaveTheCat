@@ -21,7 +21,8 @@ fun InputField(
     title: String,
     value: String,
     updateValue: (String) -> Unit,
-    showValue: Boolean = true
+    showValue: Boolean = true,
+    isError: Boolean = false
 ) {
     Column(
         modifier = modifier
@@ -31,7 +32,7 @@ fun InputField(
                 .padding(start = 20.dp),
             text = title
         )
-        TextField(
+        OutlinedTextField(
             value = value,
             onValueChange = updateValue,
             shape = RoundedCornerShape(50),
@@ -40,7 +41,8 @@ fun InputField(
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
             ),
-            visualTransformation = if (showValue) VisualTransformation.None else PasswordVisualTransformation()
+            visualTransformation = if (showValue) VisualTransformation.None else PasswordVisualTransformation(),
+            isError = isError
         )
     }
 }

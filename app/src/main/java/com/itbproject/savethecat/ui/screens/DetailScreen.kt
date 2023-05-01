@@ -16,6 +16,7 @@ import com.itbproject.savethecat.R
 import com.itbproject.savethecat.ui.component.*
 import com.itbproject.savethecat.ui.viewmodels.DetailState
 import com.itbproject.savethecat.ui.component.LoadIndicator
+import com.itbproject.savethecat.ui.models.DetailUiModel
 
 @Composable
 fun DetailScreen(
@@ -35,7 +36,7 @@ fun DetailScreen(
             ) {
                 item {
                     ImageCarousel(
-                        images = if (breedModel.detailState.images != emptyList<String>()) breedModel.detailState.images else listOf("https://www.womansworld.com/wp-content/uploads/2018/05/sad-cat-luhu.jpg?w=715"),
+                        images = breedModel.detailState.images,
                         modifier = Modifier
                     )
 
@@ -118,5 +119,21 @@ fun DetailScreen(
 @Preview
 @Composable
 fun DetailScreenPreview() {
-
+    DetailScreen(
+        breedModel = DetailState.SUCCESS(
+            DetailUiModel(
+                images = emptyList(),
+                name = "Preview Cat",
+                descripcion = "The preview cat again!!! What a surprise!",
+                alt_names = "non",
+                origin = "BCN",
+                origin_code = "ES",
+                life_span = "10",
+                wikipedia_url = "",
+                stats_map = mapOf(
+                    "Preview" to 6,
+                    "Almost Preview" to 3
+                )
+            )
+        ))
 }

@@ -1,21 +1,26 @@
 package com.itbproject.savethecat.ui.viewmodels
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.itbproject.savethecat.coroutines.AppDispatchers
+import com.itbproject.savethecat.data.network.*
 import com.itbproject.savethecat.ui.models.LoginUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.RequestBody
+import java.io.IOException
 
-class MainViewmodel : ViewModel() {
-    private val _loginState = MutableStateFlow<LoginUiModel?>(null)
-    val loginState: StateFlow<LoginUiModel?> = _loginState.asStateFlow()
+class MainViewmodel(
+    private val apiService: UsersApiService = UsersApi.retrofitService,
+    private val appDispatchers: AppDispatchers = AppDispatchers()
+) : ViewModel() {
+    private val _loginState = MutableStateFlow<LoginState>(LoginState.START)
+    val loginState: StateFlow<LoginState> = _loginState.asStateFlow()
 
     var userName by mutableStateOf("")
         private set
@@ -25,14 +30,39 @@ class MainViewmodel : ViewModel() {
 
     fun checkCredentials() {
         viewModelScope.launch {
-            _loginState.value = LoginUiModel(
-                user = userName,
-                pssw = password
+            _loginState.value = LoginState.LOADING(
+                LoginUiModel(
+                    user = userName,
+                    pssw = password
+                )
             )
 
-//            MockedApiService.getMockAPI().login(RequestBody.create(
-//                MediaType.parse("application/json"),
-//                _loginState.value!!.toString()))
+            viewModelScope.launch {
+                try{
+                    val userList = apiService.getUsers()
+                    val user = (loginState.value as LoginState.LOADING).loginState.pssw
+                    Log.i("a", user)
+
+                    userList.let {
+                        for(i in userList.indices){
+                            if (userList[i].username == ((loginState.value as LoginState.LOADING).loginState.user)){
+                                if (FAKE_PASSWORDS[i] == (loginState.value as LoginState.LOADING).loginState.pssw){
+                                    _loginState.value = LoginState.SUCCESS
+                                }
+
+                                break
+                            }
+                        }
+
+                        if (_loginState.value != LoginState.SUCCESS){
+                            _loginState.value = LoginState.FAILURE
+                        }
+                    }
+                }
+                catch (e: IOException){
+                    _loginState.value = LoginState.ERROR(e.localizedMessage!!)
+                }
+            }
         }
     }
 
@@ -44,9 +74,15 @@ class MainViewmodel : ViewModel() {
         password = pass
     }
 
-    fun setNewState(){
-
+    fun restart(){
+        _loginState.value = LoginState.START
     }
+}
 
-
+sealed class LoginState {
+    object START : LoginState()
+    data class LOADING(val loginState: LoginUiModel): LoginState()
+    object SUCCESS : LoginState()
+    object FAILURE : LoginState()
+    data class ERROR(val message: String) : LoginState()
 }

@@ -1,5 +1,9 @@
 package com.itbproject.savethecat.ui.component
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,13 +13,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.itbproject.savethecat.data.models.BreedDto
+import com.itbproject.savethecat.R
 import com.itbproject.savethecat.ui.models.BreedUiModel
 import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 
@@ -36,13 +42,24 @@ fun CatCard(cat: BreedUiModel, modifier: Modifier = Modifier, action: () -> Unit
             modifier = Modifier
                 .background(color = MaterialTheme.colors.background)
         ) {
-            GlideImage(
-                model = cat.breedImageUrl ?: "https://www.womansworld.com/wp-content/uploads/2018/05/sad-cat-luhu.jpg?w=715",
-                contentDescription = "Cat",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(200.dp)
-            )
+            if (cat.breedImageUrl != null){
+                GlideImage(
+                    model = cat.breedImageUrl,
+                    contentDescription = "Cat",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(200.dp)
+                )
+            }
+            else{
+                Image(
+                    painter = painterResource(id = R.drawable.default_cat),
+                    contentDescription = stringResource(id = R.string.SadCat),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(200.dp)
+                )
+            }
 
             Text(
                 modifier = Modifier
@@ -80,9 +97,25 @@ fun CatCard(cat: BreedUiModel, modifier: Modifier = Modifier, action: () -> Unit
 @Preview
 @Composable
 fun CatCardPreview() {
-//    val cat = BreedDto()
-//
-//    SaveTheCatTheme {
-//        CatCard(cat, action = { })
-//    }
+    val cat = BreedUiModel(
+        id = "avecrem",
+        breedName = "El gato del preview",
+        breedDescription = "Es un gato usado para preview solo. Está triste",
+        breedImageUrl = null,
+        origin = "BCN",
+        countryCode = "ES"
+    )
+
+    SaveTheCatTheme {
+        CatCard(
+            cat,
+            action = { },
+            modifier = Modifier
+            .animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
+            ))
+    }
 }

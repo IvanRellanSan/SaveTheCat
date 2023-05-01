@@ -32,12 +32,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginStartScreen(
-    viewModel: MainViewmodel = viewModel()
-) {
-    LoginScreen(
-        onSignInClick = { }
-    )
+fun LoginStartScreen() {
+
+
+    LoginScreen()
 //    CatGrid(
 //        catList,
 //        modifier = Modifier

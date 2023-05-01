@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.navigation.GridNavigator
+import com.itbproject.savethecat.ui.models.BreedUiModel
+import com.itbproject.savethecat.ui.theme.SaveTheCatTheme
 import com.itbproject.savethecat.ui.viewmodels.GridState
 
 @Composable
@@ -56,8 +58,36 @@ fun CatGrid(
 @Preview
 @Composable
 fun CatGridPreview() {
-//    val catList = Datasource().loadAffirmations()
-//    SaveTheCatTheme {
-//        CatGrid(catList = catList)
-//    }
+    val catList = GridState.SUCCESS(
+        listOf(
+            BreedUiModel(
+                id = "avecrem",
+                breedName = "El gato del preview",
+                breedDescription = "Es un gato usado para preview solo. Está triste",
+                breedImageUrl = null,
+                origin = "BCN",
+                countryCode = "ES"
+            ),
+            BreedUiModel(
+                id = "avecrem",
+                breedName = "El gato del preview",
+                breedDescription = "Es un gato usado para preview solo. Está triste",
+                breedImageUrl = null,
+                origin = "BCN",
+                countryCode = "ES"
+            ),
+            BreedUiModel(
+                id = "avecrem",
+                breedName = "El gato del preview",
+                breedDescription = "Es un gato usado para preview solo. Está triste",
+                breedImageUrl = null,
+                origin = "BCN",
+                countryCode = "ES"
+            ),
+        )
+    )
+    
+    SaveTheCatTheme {
+        CatGrid(catList = catList)
+    }
 }
