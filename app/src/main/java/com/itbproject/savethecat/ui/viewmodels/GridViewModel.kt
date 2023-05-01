@@ -1,22 +1,26 @@
 package com.itbproject.savethecat.ui.viewmodels
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itbproject.savethecat.data.models.BreedDto
+import com.itbproject.savethecat.coroutines.AppDispatchers
 import com.itbproject.savethecat.data.network.CatApi
+import com.itbproject.savethecat.data.network.CatApiService
 import com.itbproject.savethecat.ui.models.BreedUiModel
 import com.itbproject.savethecat.ui.models.mapper.BreedDtoToBreedUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
-class GridViewModel : ViewModel() {
+class GridViewModel(
+    private val apiService: CatApiService = CatApi.retrofitService,
+    private val appDispatchers: AppDispatchers = AppDispatchers()
+) : ViewModel() {
     private val _gridState = MutableStateFlow<State>(State.START)
     val gridState: StateFlow<State> = _gridState.asStateFlow()
 
@@ -30,16 +34,17 @@ class GridViewModel : ViewModel() {
     }
 
     private fun getBreeds() {
-        _gridState.value = State.LOADING
         viewModelScope.launch {
+            _gridState.value = State.LOADING
             try {
-                val list = CatApi.retrofitService.getBreeds()
-                val newList = BreedDtoToBreedUiModel().map(list)
+                val list = withContext(appDispatchers.IO) {
+                    apiService.getBreeds()
+                }
 
-                _gridState.value = State.SUCCESS(newList)
+                _gridState.value = State.SUCCESS(BreedDtoToBreedUiModel().map(list))
 
-                if (countryList.size <= 1){
-                    for (i in list.indices){
+                if (_gridState.value != State.LOADING && countryList.size <= 1){
+                    for (i in (_gridState.value as State.SUCCESS).gridState.indices){
 
                         if (!countryList.contains((_gridState.value as State.SUCCESS).gridState[i].countryCode)){
                             countryList += (_gridState.value as State.SUCCESS).gridState[i].countryCode
@@ -48,7 +53,7 @@ class GridViewModel : ViewModel() {
                 }
             }
             catch (e: IOException){
-                _gridState.value = State.FAILURE("")
+                _gridState.value = State.FAILURE(e.localizedMessage!!)
             }
         }
     }
@@ -69,7 +74,7 @@ class GridViewModel : ViewModel() {
             currentCountryCode = countryCode
             if (countryCode != "ANY"){
                 viewModelScope.launch {
-                    val filteredList = CatApi.retrofitService.getBreeds().filter { it.country_code == countryCode }
+                    val filteredList = apiService.getBreeds().filter { it.country_code == countryCode }
 
                     if (filteredList.isNotEmpty()){
                         _gridState.value = State.SUCCESS(BreedDtoToBreedUiModel().map(filteredList))

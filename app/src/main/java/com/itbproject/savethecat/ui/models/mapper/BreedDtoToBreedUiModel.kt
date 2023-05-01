@@ -4,8 +4,9 @@ import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.ui.models.BreedUiModel
 
 class BreedDtoToBreedUiModel {
-    fun map(list: List<BreedDto>) : List<BreedUiModel> {
-        val newList = list.map {
+    fun map(list: List<BreedDto>?): List<BreedUiModel> {
+
+        return list?.map {
             BreedUiModel(
                 id = it.id,
                 breedName = it.name,
@@ -14,8 +15,6 @@ class BreedDtoToBreedUiModel {
                 origin = it.origin,
                 countryCode = it.country_code
             )
-        }
-
-        return newList
+        } ?: emptyList()
     }
 }
