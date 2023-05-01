@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class MainViewmodel(
@@ -39,9 +40,7 @@ class MainViewmodel(
 
             viewModelScope.launch {
                 try{
-                    val userList = apiService.getUsers()
-                    val user = (loginState.value as LoginState.LOADING).loginState.pssw
-                    Log.i("a", user)
+                    val userList = withContext(appDispatchers.IO) { apiService.getUsers() }
 
                     userList.let {
                         for(i in userList.indices){
