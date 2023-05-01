@@ -46,7 +46,6 @@ class DetailActivity : ComponentActivity() {
 fun StartScreen(viewModel: DetailViewmodel = viewModel(), id: String){
     val detailState by viewModel.detailState.collectAsState()
     viewModel.loadBreed(id)
-    Log.i("Eledu comprobaciones", "llamado jeje")
     DetailScreen(breedModel = detailState)
 }
 
