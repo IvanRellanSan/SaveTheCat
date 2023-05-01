@@ -14,42 +14,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.navigation.GridNavigator
 import com.itbproject.savethecat.ui.models.BreedUiModel
+import com.itbproject.savethecat.ui.viewmodels.State
 
 @Composable
 fun CatGrid(
-    catList: List<BreedUiModel>,
+    catList: State,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
 
-    if (catList.isEmpty()){
-        LoadIndicator(
+    when (catList){
+        is State.LOADING, State.LOADING -> LoadIndicator(
             modifier = Modifier
                 .fillMaxSize()
         )
-    }
-    else{
-        LazyVerticalGrid(
-            modifier = modifier,
-            columns = GridCells.Fixed(2)
-        ){
-            items(
-                items = catList,
-                itemContent = {
-                    CatCard(
-                        cat = it,
-                        action = { GridNavigator().goToDetailActivity(it.id, context = context) },
-                        modifier = Modifier
-                            .animateContentSize(
-                                animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioLowBouncy,
-                                    stiffness = Spring.StiffnessLow
+        is State.SUCCESS -> {
+            LazyVerticalGrid(
+                modifier = modifier,
+                columns = GridCells.Fixed(2)
+            ){
+                items(
+                    items = catList.gridState,
+                    itemContent = {
+                        CatCard(
+                            cat = it,
+                            action = { GridNavigator().goToDetailActivity(it.id, context = context) },
+                            modifier = Modifier
+                                .animateContentSize(
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioLowBouncy,
+                                        stiffness = Spring.StiffnessLow
+                                    )
                                 )
-                            )
-                    )
-                }
-            )
+                        )
+                    }
+                )
+            }
         }
+        is State.FAILURE -> { /*TODO*/ }
+        else -> { /*TODO*/ }
     }
 }
 

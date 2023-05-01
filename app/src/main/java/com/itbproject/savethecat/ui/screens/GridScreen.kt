@@ -13,11 +13,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.itbproject.savethecat.ui.component.FilterBy
 import com.itbproject.savethecat.ui.component.SortBy
 import com.itbproject.savethecat.ui.models.BreedUiModel
+import com.itbproject.savethecat.ui.viewmodels.State
 
 @Composable
 fun GridScreen(
     modifier: Modifier = Modifier,
-    catList: List<BreedUiModel>,
+    catList: State,
     viewModel: GridViewModel = viewModel()
 ) {
     val scaffoldState = rememberScaffoldState()

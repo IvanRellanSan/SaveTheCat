@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 class GridViewModel : ViewModel() {
-    private val _gridState = MutableStateFlow<List<BreedUiModel>>(mutableListOf())
-    val gridState: StateFlow<List<BreedUiModel>> = _gridState.asStateFlow()
+    private val _gridState = MutableStateFlow<State>(State.START)
+    val gridState: StateFlow<State> = _gridState.asStateFlow()
 
     val countryList: MutableList<String> = mutableListOf("ANY")
 
@@ -30,43 +30,49 @@ class GridViewModel : ViewModel() {
     }
 
     private fun getBreeds() {
+        _gridState.value = State.LOADING
         viewModelScope.launch {
             try {
                 val list = CatApi.retrofitService.getBreeds()
-                _gridState.value = BreedDtoToBreedUiModel().map(list)
+                val newList = BreedDtoToBreedUiModel().map(list)
+
+                _gridState.value = State.SUCCESS(newList)
+
                 if (countryList.size <= 1){
                     for (i in list.indices){
 
-                        if (!countryList.contains(_gridState.value[i].countryCode)){
-                            countryList += _gridState.value[i].countryCode
+                        if (!countryList.contains((_gridState.value as State.SUCCESS).gridState[i].countryCode)){
+                            countryList += (_gridState.value as State.SUCCESS).gridState[i].countryCode
                         }
                     }
                 }
             }
             catch (e: IOException){
-                Log.d("ERROR", e.toString())
+                _gridState.value = State.FAILURE("")
             }
         }
     }
 
     fun sortByName(){
-        _gridState.value = _gridState.value.sortedBy { it.breedName }
+        _gridState.value = State.LOADING
+        _gridState.value = State.SUCCESS((_gridState.value as State.SUCCESS).gridState.sortedBy { it.breedName })
     }
 
     fun sortByCountry(){
-        _gridState.value = _gridState.value.sortedBy { it.origin }
+        _gridState.value = State.LOADING
+        _gridState.value = State.SUCCESS((_gridState.value as State.SUCCESS).gridState.sortedBy { it.origin })
     }
 
     fun filterByCountry(countryCode: String){
         if (countryCode != currentCountryCode){
-            _gridState.value = mutableListOf()
+            _gridState.value = State.LOADING
             currentCountryCode = countryCode
             if (countryCode != "ANY"){
                 viewModelScope.launch {
                     val filteredList = CatApi.retrofitService.getBreeds().filter { it.country_code == countryCode }
 
                     if (filteredList.isNotEmpty()){
-                        _gridState.value = BreedDtoToBreedUiModel().map(filteredList)
+                        _gridState.value = State.SUCCESS(BreedDtoToBreedUiModel().map(filteredList))
                     }
                 }
             }
@@ -79,4 +85,11 @@ class GridViewModel : ViewModel() {
     private fun deleteFilter(){
         getBreeds()
     }
+}
+
+sealed class State {
+    object START : State()
+    object LOADING : State()
+    data class SUCCESS(val gridState: List<BreedUiModel>) : State()
+    data class FAILURE(val message: String) : State()
 }
