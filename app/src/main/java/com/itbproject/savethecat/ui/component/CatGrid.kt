@@ -11,24 +11,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.navigation.GridNavigator
-import com.itbproject.savethecat.ui.models.BreedUiModel
-import com.itbproject.savethecat.ui.viewmodels.State
+import com.itbproject.savethecat.ui.viewmodels.GridState
 
 @Composable
 fun CatGrid(
-    catList: State,
+    catList: GridState,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
 
     when (catList){
-        is State.LOADING, State.LOADING -> LoadIndicator(
+        is GridState.START, GridState.LOADING -> LoadIndicator(
             modifier = Modifier
                 .fillMaxSize()
         )
-        is State.SUCCESS -> {
+        is GridState.SUCCESS -> {
             LazyVerticalGrid(
                 modifier = modifier,
                 columns = GridCells.Fixed(2)
@@ -51,8 +49,7 @@ fun CatGrid(
                 )
             }
         }
-        is State.FAILURE -> { /*TODO*/ }
-        else -> { /*TODO*/ }
+        is GridState.FAILURE -> { /*TODO*/ }
     }
 }
 

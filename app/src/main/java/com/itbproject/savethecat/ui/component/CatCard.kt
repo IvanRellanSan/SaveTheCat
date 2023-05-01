@@ -37,13 +37,12 @@ fun CatCard(cat: BreedUiModel, modifier: Modifier = Modifier, action: () -> Unit
                 .background(color = MaterialTheme.colors.background)
         ) {
             GlideImage(
-                model = cat.breedImageUrl!!,
+                model = cat.breedImageUrl ?: "https://www.womansworld.com/wp-content/uploads/2018/05/sad-cat-luhu.jpg?w=715",
                 contentDescription = "Cat",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(200.dp)
             )
-
 
             Text(
                 modifier = Modifier

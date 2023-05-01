@@ -1,5 +1,7 @@
 package com.itbproject.savethecat.ui.models.mapper
 
+import androidx.compose.ui.res.stringResource
+import com.itbproject.savethecat.R
 import com.itbproject.savethecat.data.models.BreedDto
 import com.itbproject.savethecat.data.models.ImageDto
 import com.itbproject.savethecat.ui.models.DetailUiModel
@@ -9,18 +11,18 @@ class BreedDtoToDetailUiState {
         return DetailUiModel(
             images = mutableListOf<String>().apply {
                 imageList.let { list ->
-                    list!!.forEach {
+                    list?.forEach {
                         add(it.url)
                     }
                 }
             },
             name = breedDto.name,
             descripcion = breedDto.description,
-            alt_names = breedDto.alt_names!!,
+            alt_names = breedDto.alt_names ?: "UNKNOWN",
             origin = breedDto.origin,
             origin_code = breedDto.country_code,
             life_span = breedDto.life_span,
-            wikipedia_url = breedDto.wikipedia_url!!,
+            wikipedia_url = breedDto.wikipedia_url ?: "https://en.wikipedia.org/wiki/HTTP_404",
             stats_map = mapOf(
                 "Affection Level" to breedDto.affection_level,
                 "Adaptability" to breedDto.adaptability,

@@ -18,7 +18,7 @@ import kotlin.coroutines.ContinuationInterceptor
 class GridViewModelTest {
 
     @get:Rule
-    val mainCourotineRule = MainCourotineRule()
+    val mainCourotineRule = GridCourotineRule()
 
     private val catApiService = mock<CatApiService>()
 
@@ -47,7 +47,7 @@ class GridViewModelTest {
             apiService = catApiService,
             appDispatchers = testDispatcher
         )
-        Assert.assertEquals(State.LOADING, viewModel.gridState.value)
+        Assert.assertEquals(GridState.LOADING, viewModel.gridState.value)
     }
 
     @Test
@@ -57,7 +57,7 @@ class GridViewModelTest {
             apiService = catApiService,
             appDispatchers = testDispatcher
         )
-        Assert.assertEquals(State.SUCCESS(emptyList()), viewModel.gridState.value)
+        Assert.assertEquals(GridState.SUCCESS(emptyList()), viewModel.gridState.value)
     }
 
     @Test
@@ -67,12 +67,12 @@ class GridViewModelTest {
             apiService = catApiService,
             appDispatchers = testDispatcher
         )
-        Assert.assertEquals(State.FAILURE("Error"), viewModel.gridState.value)
+        Assert.assertEquals(GridState.FAILURE("Error"), viewModel.gridState.value)
     }
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class MainCourotineRule : TestWatcher(),
+class GridCourotineRule : TestWatcher(),
                           TestCoroutineScope by TestCoroutineScope() {
     override fun starting(description: Description) {
         super.starting(description)

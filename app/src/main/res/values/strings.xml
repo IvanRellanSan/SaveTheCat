@@ -8,4 +8,7 @@
     <string name="UserNameTitle">Name</string>
     <string name="MailTitle">Mail</string>
     <string name="PasswordTitle">Password</string>
+
+    <string name="WikipediaText">See on wikipedia</string>
+    <string name="NonResult">UNKNOWN</string>
 </resources>

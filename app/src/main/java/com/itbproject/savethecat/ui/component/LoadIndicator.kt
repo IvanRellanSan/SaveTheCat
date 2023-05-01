@@ -5,6 +5,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -17,5 +18,10 @@ fun LoadIndicator(modifier: Modifier = Modifier) {
             strokeWidth = 6.dp
         )
     }
+}
 
+@Preview
+@Composable
+fun LoadIndicatorPreview() {
+    LoadIndicator()
 }

@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -45,7 +46,7 @@ fun LoginScreen(
         )
 
         InputField(
-            title = "Name",
+            title = stringResource(id = R.string.UserNameTitle),
             value = viewmodel.userName,
             updateValue = { viewmodel.updateUsername(it) },
             showValue = true
@@ -57,7 +58,7 @@ fun LoginScreen(
         )
 
         InputField(
-            title = "Password",
+            title = stringResource(id = R.string.PasswordTitle),
             value = viewmodel.password,
             updateValue = { viewmodel.updatePassword(it) },
             showValue = false
